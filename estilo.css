@@ -1,0 +1,145 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Dancing Script', cursive;
+  overflow: hidden;
+}
+
+/* Página inicio */
+.inicio {
+  background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+  color: #fff;
+  text-align: center;
+}
+
+.mensaje {
+  font-size: 50px;
+  margin-top: 80px;
+  text-shadow: 0 0 15px #ff8dd1;
+}
+
+.boton {
+  display: block;
+  margin: 50px auto;
+  padding: 14px 30px;
+  background-color: #ff6ec7;
+  color: white;
+  border: none;
+  border-radius: 25px;
+  font-size: 22px;
+  cursor: pointer;
+  box-shadow: 0 0 12px #ff6ec7;
+  transition: transform 0.3s ease;
+}
+.boton:hover {
+  transform: scale(1.1);
+}
+
+/* Página corazón */
+.corazon-page {
+  background: none;
+  overflow: hidden;
+  height: 100vh;
+}
+
+#estrellas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+.contenido {
+  text-align: center;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #fff;
+}
+
+.corazon {
+  font-size: 100px;
+  animation: pulse 2s infinite;
+}
+
+.imagen-corazon {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin: 20px auto;
+  display: block;
+  border: 3px solid white;
+  box-shadow: 0 0 10px white;
+  opacity: 1;
+  transition: opacity 0.5s ease;
+}
+
+.mensaje-corazon {
+  font-size: 32px;
+  margin-top: 20px;
+  text-shadow: 0 0 8px #ff8dd1;
+}
+
+.lluvia span {
+  pointer-events: none;
+  display: inline-block;
+}
+
+.lluvia img {
+  display: block;
+  border: 2px solid white;
+  clip-path: path('M24 4C15 -4 0 4 0 18c0 8 8 14 24 28 16-14 24-20 24-28C48 4 33 -4 24 4z');
+}
+
+
+@keyframes lluvia {
+  to {
+    transform: translateY(100vh);
+    opacity: 0;
+  }
+}
+
+.lluvia-btn {
+  margin-top: 30px;
+  background-color: #ff8dd1;
+  font-size: 20px;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .mensaje {
+    font-size: 32px;
+  }
+  .imagen-corazon {
+    width: 130px;
+    height: 130px;
+  }
+  .mensaje-corazon {
+    font-size: 24px;
+  }
+}
+/* Animación de latido para el corazón */
+.corazon {
+  font-size: 100px;
+  animation: pulse 1.5s infinite;
+  cursor: pointer;
+  user-select: none;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+
+/* Fondo del canvas detrás */
+#estrellas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+}

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Te amo 3 millones</title>
+  <link rel="stylesheet" href="estilo.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
+</head>
+<body class="corazon-page">
+  <canvas id="estrellas"></canvas>
+  <div class="contenido">
+    <!-- El corazón ahora es clickeable -->
+    <div class="corazon" onclick="toggleLluvia()">💗</div>
+    <img id="fotoCentro" class="imagen-corazon" src="imagenes/img1.jpg" alt="foto especial">
+    <div class="mensaje-corazon">Te amo 3 millones mi Yuli</div>
+    <div class="lluvia" id="lluvia"></div>
+  </div>
+
+  <script>
+    // Fondo animado de estrellas
+    const canvas = document.getElementById('estrellas');
+    const ctx = canvas.getContext('2d');
+    let w = canvas.width = window.innerWidth;
+    let h = canvas.height = window.innerHeight;
+    let estrellas = Array.from({length:150}).map(()=>({
+      x:Math.random()*w, y:Math.random()*h, r:Math.random()*1.2, d:Math.random()*0.5
+    }));
+
+    function dibujarEstrellas(){
+      ctx.clearRect(0,0,w,h);
+      ctx.fillStyle='white';
+      estrellas.forEach(e=>{
+        ctx.beginPath();
+        ctx.arc(e.x,e.y,e.r,0,Math.PI*2);
+        ctx.fill();
+        e.y+=e.d;
+        if(e.y>h){e.y=0;e.x=Math.random()*w;}
+      });
+      requestAnimationFrame(dibujarEstrellas);
+    }
+    dibujarEstrellas();
+    window.addEventListener('resize',()=>{
+      w = canvas.width = window.innerWidth;
+      h = canvas.height = window.innerHeight;
+    });
+
+    // Carrusel con transición suave
+    const fotos = [
+      "imagenes/img1.jpg",
+      "imagenes/img2.jpg",
+      "imagenes/img3.jpg",
+      "imagenes/img4.jpg",
+      "imagenes/img5.jpg",
+      "imagenes/img6.jpg",
+      "imagenes/img7.jpg",
+      "imagenes/img8.jpg",
+      "imagenes/img9.jpg",
+      "imagenes/img10.jpg",
+      "imagenes/img11.jpg",
+      "imagenes/img12.jpg",
+      "imagenes/img13.jpg",
+      "imagenes/img14.jpg",
+      "imagenes/img15.jpg",
+      "imagenes/img16.jpg",
+      "imagenes/img17.jpg",
+      "imagenes/img18.jpg",
+      "imagenes/img19.jpg",
+      "imagenes/img20.jpg",
+      "imagenes/img21.jpg",
+    ];
+    let fotoIndex = 0;
+    const foto = document.getElementById("fotoCentro");
+    function cambiarFoto() {
+      foto.style.opacity = 0;
+      setTimeout(()=>{
+        foto.src = fotos[fotoIndex];
+        foto.style.opacity = 1;
+        fotoIndex = (fotoIndex + 1) % fotos.length;
+      },500);
+    }
+    setInterval(cambiarFoto, 3000);
+
+    // Lluvia activada con el corazón
+    const lluvia = document.getElementById("lluvia");
+    const emojis = ["🌷", "✨","💗", "🐧"];
+    let lluviaActiva = false;
+    let lluviaInterval;
+
+    function crearEmoji() {
+  const elemento = document.createElement("span");
+  
+  if (Math.random() < 0.5) {
+    // Crear emoji
+    elemento.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+    elemento.style.fontSize = (Math.random() * 20 + 16) + "px";
+  } else {
+    // Crear imagen pequeña
+    const img = document.createElement("img");
+    img.src = fotos[Math.floor(Math.random() * fotos.length)];
+    img.style.width = (Math.random() * 30 + 40) + "px"; // 40-70px
+    img.style.height = "auto";
+    img.style.borderRadius = "8px";
+    elemento.appendChild(img);
+  }
+  
+  elemento.style.left = Math.random() * 100 + "vw";
+  elemento.style.position = "absolute";
+  elemento.style.top = "-50px";
+  elemento.style.animation = `lluvia ${Math.random()*3+5}s linear forwards`;
+  
+  lluvia.appendChild(elemento);
+  
+  setTimeout(() => elemento.remove(), 8000);
+}
+
+
+    function toggleLluvia() {
+      if(lluviaActiva){
+        clearInterval(lluviaInterval);
+        lluviaActiva=false;
+      } else {
+        lluviaInterval = setInterval(crearEmoji, 200);
+        lluviaActiva=true;
+      }
+    }
+  </script>
+</body>
+</html>
